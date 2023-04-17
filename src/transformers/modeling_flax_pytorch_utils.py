@@ -381,6 +381,7 @@ def load_flax_weights_in_pytorch_model(pt_model, flax_state):
             else:
                 # add weight to pytorch dict
                 flax_tensor = np.asarray(flax_tensor) if not isinstance(flax_tensor, np.ndarray) else flax_tensor
+                flax_tensor = np.copy(flax_tensor)
                 pt_model_dict[flax_key] = torch.from_numpy(flax_tensor)
                 # remove from missing keys
                 missing_keys.remove(flax_key)
